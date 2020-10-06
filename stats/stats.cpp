@@ -25,26 +25,31 @@ void Stats::showAllProcessInfo() {
 }
 
 float Stats::get_av_response_time() {
-	return av_response_time;
+	float r = 0.0;
+	for (int i = 0; i < vec->size(); i++){
+		r += (vec->at(i).start_time - vec->at(i).arrival_time);
+	}
+	return r / vec->size();
 }
 
 float Stats::get_av_turnaround_time() {
-	return av_turnaround_time;
+	float t = 0.0;
+	for (int i = 0; i < vec->size(); i++){
+		t += (vec->at(i).finish_time - vec->at(i).arrival_time);
+	}
+	return t / vec->size();
 }
 
 float Stats::get_av_wait_time() {
-	calcStats();
-	return av_wait_time;
+	float w = 0.0;
+	for (int i = 0; i < vec->size(); i++){
+		w += (vec->at(i).finish_time - vec->at(i).arrival_time - vec->at(i).required_cpu_time);
+	}
+	return w / vec->size();
 }
 
 void Stats::calcStats() {
-	for (int i = 0; i < vec->size(); i++){
-			av_response_time += (vec->at(i).start_time - vec->at(i).arrival_time);
-			av_turnaround_time += (vec->at(i).finish_time - vec->at(i).arrival_time);
-			av_wait_time += (vec->at(i).finish_time - vec->at(i).arrival_time - vec->at(i).required_cpu_time);
-		}
-
-	av_response_time /= vec->size();
-	av_turnaround_time /= vec->size();
-	av_wait_time /= vec->size();
+	av_turnaround_time = get_av_turnaround_time();
+	av_response_time = get_av_response_time();
+	av_wait_time = get_av_wait_time();
 }
