@@ -11,7 +11,7 @@
 
 PCB Dispatcher::get_from_CPU() {
 	PCB p = cpu->get_process_off_core();
-	is_valid_job_on_cpu = p.process_number != UNINITIALIZED;
+	is_valid_job_on_cpu = p.process_number == UNINITIALIZED;
 	return p;
 }
 

@@ -23,6 +23,7 @@ bool cpuSort (PCB i, PCB j){
 }
 
 void Scheduler_SRTF::sort() {
+	preemptive = true;
 	std::vector<PCB> v;
 
 	while (!ready_q->empty()){

@@ -19,8 +19,8 @@ void Stats::showAllProcessInfo() {
 	if (vec->size() < 1) return;
 
 	for (int i = 0; i < vec->size(); i++){
-		std::cout << "Process " << i << " Required CPU time: " << vec->at(i).required_cpu_time << "arrived: " << vec->at(i).arrival_time << "started: "
-				<< vec->at(i).start_time << "finished: " << vec->at(i).finish_time << std::endl;
+		std::cout << "Process " << i << " Required CPU time: " << vec->at(i).required_cpu_time << " arrived: " << vec->at(i).arrival_time << " started: "
+				<< vec->at(i).start_time << " finished: " << vec->at(i).finish_time << std::endl;
 	}
 }
 
@@ -33,6 +33,7 @@ float Stats::get_av_turnaround_time() {
 }
 
 float Stats::get_av_wait_time() {
+	calcStats();
 	return av_wait_time;
 }
 

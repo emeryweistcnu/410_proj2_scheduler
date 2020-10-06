@@ -10,6 +10,7 @@
 
 void Scheduler::add(PCB p) {
 	ready_q->push(p);
+	sort();
 }
 
 PCB Scheduler::getNext() {
@@ -27,6 +28,7 @@ bool Scheduler::isEmpty() {
 }
 
 bool Scheduler::time_to_switch_processes(int tick_count, PCB &p) {
+	sort();
 	return (p.remaining_cpu_time < 1 || (preemptive && tick_count - p.start_time >= time_slice));
 }
 
